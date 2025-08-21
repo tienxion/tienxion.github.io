@@ -1,11 +1,11 @@
 import type { IconMap, SocialLink, Site } from '@/types'
 
 export const SITE: Site = {
-  title: 'astro-erudite',
+  title: 'tienxion',
   description:
-    'astro-erudite is a opinionated, unstyled blogging template—built with Astro, Tailwind, and shadcn/ui.',
+    'the personal site of tienxion',
   href: 'https://tienxion.github.io',
-  author: 'jktrn',
+  author: 'tienxion',
   locale: 'en-US',
   featuredPostCount: 2,
   postsPerPage: 3,
@@ -36,7 +36,7 @@ export const SOCIAL_LINKS: SocialLink[] = [
     label: 'GitHub',
   },
   {
-    href: 'https://twitter.com/enscry',
+    href: 'https://twitter.com/tienxion',
     label: 'Twitter',
   },
   {
