@@ -4,7 +4,7 @@ export const SITE: Site = {
   title: 'astro-erudite',
   description:
     'astro-erudite is a opinionated, unstyled blogging template—built with Astro, Tailwind, and shadcn/ui.',
-  href: 'https://astro-erudite.vercel.app',
+  href: 'https://tienxion.github.io',
   author: 'jktrn',
   locale: 'en-US',
   featuredPostCount: 2,
@@ -17,18 +17,22 @@ export const NAV_LINKS: SocialLink[] = [
     label: 'blog',
   },
   {
-    href: '/authors',
-    label: 'authors',
-  },
-  {
     href: '/about',
     label: 'about',
   },
+  {
+    href: '/misc',
+    label: 'misc',
+  },
+  {
+    href: '/tags',
+    label: 'tags',
+  }
 ]
 
 export const SOCIAL_LINKS: SocialLink[] = [
   {
-    href: 'https://github.com/jktrn',
+    href: 'https://github.com/tienxion',
     label: 'GitHub',
   },
   {
