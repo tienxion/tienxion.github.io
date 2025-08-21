@@ -2,22 +2,210 @@
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import PageHead from '@/components/PageHead.astro'
 import Layout from '@/layouts/Layout.astro'
-
+import { Card, CardContent } from "@/components/ui/card";
+import { motion } from "framer-motion";
 ---
 
-<Layout class="max-w-3xl">
-  <PageHead slot="head" title="Misc" />
-  <Breadcrumbs items={[{ label: 'Misc', icon: 'lucide:info' }]} />
+export default function ResumePage() {
+  return (
+    <div className="p-6 max-w-5xl mx-auto space-y-12">
+      <h1 className="text-4xl font-bold text-center mb-8">Arnav Adepu</h1>
 
-  <section>
-    <div class="min-w-full">
-      <div class="prose mb-8">
-        <p class="mt-0">
-          hello i am arnav write MISC stuff here, use chatgpt or smth for formatting
-          nicer
-        </p>
-      </div>
+      {/* Section Component */}
+      {sections.map((section, idx) => (
+        <motion.div
+          key={idx}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: idx * 0.2 }}
+          className="space-y-4"
+        >
+          <h2 className="text-2xl font-semibold border-b pb-2">{section.title}</h2>
+          <div className="grid md:grid-cols-2 gap-4">
+            {section.items.map((item, i) => (
+              <Card key={i} className="rounded-2xl shadow-md">
+                <CardContent className="p-4 space-y-2">
+                  <h3 className="text-lg font-medium">{item.title}</h3>
+                  {item.subtitle && <p className="text-sm text-gray-500">{item.subtitle}</p>}
+                  <ul className="list-disc list-inside text-sm space-y-1">
+                    {item.points.map((pt, j) => (
+                      <li key={j}>{pt}</li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </motion.div>
+      ))}
+
+      {/* Skills Section */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: sections.length * 0.2 }}
+        className="space-y-4"
+      >
+        <h2 className="text-2xl font-semibold border-b pb-2">Skills & Languages</h2>
+        <Card className="rounded-2xl shadow-md">
+          <CardContent className="p-4 space-y-2 text-sm">
+            <p><span className="font-semibold">Languages:</span> English (fluent), Telugu (fluent), Spanish (proficient), Hindi (intermediate)</p>
+            <p><span className="font-semibold">Programming:</span> Python, C++, C#, Java, C, LaTeX, HTML, CSS, JavaScript, Perl</p>
+            <p><span className="font-semibold">STEM Skills:</span> Mathematical modeling, soldering, laser cutting, lab machine proficiency, surgical instrument experience</p>
+            <p><span className="font-semibold">Other Skills:</span> Public speaking, PR & social media management, audio/video editing</p>
+          </CardContent>
+        </Card>
+      </motion.div>
     </div>
-  </section>
-</Layout>
+  );
+}
+
+// Data
+const sections = [
+  {
+    title: "Neuroscience / Med Stuff",
+    items: [
+      {
+        title: "BCA Space Sleep Cycle Project",
+        points: [
+          "Designed novel circadian rhythm mitigation approach (rats, drosophila)",
+          "Discussed applications with NASA astronauts"
+        ]
+      },
+      {
+        title: "NeuroAssist",
+        points: [
+          "EEG → prosthetic arm integration",
+          "ML-driven BCI translating neural signals into motor commands"
+        ]
+      },
+      {
+        title: "ISSRDC 2024 (Human Health in Space)",
+        points: ["Lead presenter on pharmaceutical chronobiotics for circadian rhythm disruption mitigation"]
+      },
+      {
+        title: "Westlake Univ. Neurovascular Biology Lab Internship",
+        points: ["Data analysis on mouse blood vessel diameters"]
+      },
+      {
+        title: "CRISPR Alzheimer’s Project",
+        points: [
+          "CRISPR-Cas9 gene editing for Alzheimer’s-associated gene expression inhibition",
+          "GFP knockout in E. coli",
+          "Poster symposium presentation"
+        ]
+      },
+      {
+        title: "HOSA Awards",
+        points: ["2nd Medical Spelling Regionals", "1st Health Education States"]
+      }
+    ]
+  },
+  {
+    title: "Math Stuff",
+    items: [
+      {
+        title: "Math Team (Captain)",
+        points: [
+          "Outreach, AMC index (249.5, just shy of USAMO)",
+          "Lectures, team publicity, articles, social media"
+        ]
+      },
+      {
+        title: "Awards",
+        points: [
+          "ARML Top Scorer",
+          "WMTC Silver & Gold",
+          "AIME ×3 (AMC DHR & Distinction)",
+          "MMOA 5th",
+          "Princeton Math Contest (team + individual placements)"
+        ]
+      },
+      {
+        title: "Math Circles",
+        points: ["DMV Math Circle (PR)", "Euler Math Circle (Problem Writing)", "Integirls (Problem Writing)"]
+      }
+    ]
+  },
+  {
+    title: "Chess Stuff",
+    items: [
+      {
+        title: "International Chess Academy Teacher & Outreach Specialist",
+        points: [
+          "Taught beginners to advanced",
+          "Ran weekly 60–70 player tournaments",
+          "Coordinated major events (250+ hrs)"
+        ]
+      },
+      {
+        title: "BCA Chess Team (Vice-Captain)",
+        points: ["Organized travel teams for competitions"]
+      },
+      {
+        title: "Awards",
+        points: ["NJ State Chess Championships, 3rd place ×2"]
+      }
+    ]
+  },
+  {
+    title: "CTF Stuff",
+    items: [
+      {
+        title: "US Cyber Team Combine Qualifier",
+        points: ["Top 100 USA"]
+      },
+      {
+        title: "Squid Proxy Lovers",
+        points: ["3rd in US, 9th in world"]
+      },
+      {
+        title: "Bing Chilling Academies (School Team)",
+        points: ["Founder, 14th in US, 83rd in world"]
+      },
+      {
+        title: "CTF Wins",
+        points: ["HackDay, BroncoCTF, SwampCTF, BSidesSF 2025 + other podium finishes"]
+      },
+      {
+        title: "Specializations",
+        points: ["OSINT", "Cryptography", "Forensics"]
+      }
+    ]
+  },
+  {
+    title: "Other ECS",
+    items: [
+      {
+        title: "Robotics Team (FTC Lead Designer & PM)",
+        points: [
+          "Rookie year state qualification",
+          "Outreach events",
+          "6 yrs FLL experience (states ×6, worlds ×2, awards)"
+        ]
+      },
+      {
+        title: "Fair Lawn Taekwondo (Junior Instructor, 3rd Dan Black Belt)",
+        points: [
+          "One of only 4 students to reach rank",
+          "Taught/testing students",
+          "Competitive sparring (1000+ hrs)"
+        ]
+      },
+      {
+        title: "Science Olympiad (Secretary)",
+        points: [
+          "Multiple medals including gold at invitationals",
+          "6th place team at states (school record)",
+          "Top-2/4 individual finishes"
+        ]
+      },
+      {
+        title: "President’s Volunteer Service Award Gold",
+        points: []
+      }
+    ]
+  }
+];
+
 ---
