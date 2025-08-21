@@ -2,7 +2,9 @@
 import Breadcrumbs from '@/components/Breadcrumbs.astro'
 import PageHead from '@/components/PageHead.astro'
 import Layout from '@/layouts/Layout.astro'
+import { getAllProjects } from '@/lib/data-utils'
 
+const projects = await getAllProjects()
 ---
 
 <Layout class="max-w-3xl">
@@ -12,12 +14,15 @@ import Layout from '@/layouts/Layout.astro'
   <section>
     <div class="min-w-full">
       <div class="prose mb-8">
-        <p class="mt-0">
-          hello i am arnav write stuff here, use chatgpt or smth for formatting
-          nicer
+        <h1 class="mt-5 text-3xl font-bold">about arnav (aka "tien.")</h1>
+        <p>
+          i'm into neuroscience and ai. however, you can see me dabbling in comp math or CTF.
+        </p>
+        <p>
+          in CTF i main forensics, but i dabble in some cryptography
+          too! however, i'm first class at OSINT, or other misc stuff.
         </p>
       </div>
     </div>
   </section>
 </Layout>
----
