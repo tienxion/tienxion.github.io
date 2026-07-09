@@ -1,5 +1,5 @@
 ---
-title: "singapore: grey cat the finals + exploring"
+title: "singapore: grey cat the flag finals + exploring"
 description: "singapore '26"
 date: 2026-07-08
 tags:
