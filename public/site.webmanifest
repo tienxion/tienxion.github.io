@@ -1,0 +1,21 @@
+{
+  "name": "arnav",
+  "short_name": "arnav",
+  "icons": [
+    {
+      "src": "/gengar.jpg",
+      "sizes": "900x900",
+      "type": "image/jpeg",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/gengar.jpg",
+      "sizes": "900x900",
+      "type": "image/jpeg",
+      "purpose": "maskable"
+    }
+  ],
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "display": "standalone"
+}

@@ -1,0 +1,176 @@
+---
+import MetaPage from "@/components/MetaPage.astro"
+import Layout from "@/layouts/Layout.astro"
+import { getPosts } from "@/lib/content"
+import { formatDate, withBase } from "@/lib/utils"
+
+const posts = (await getPosts()).slice(0, 3)
+---
+
+<Layout wide>
+  <MetaPage slot="head" />
+  <section class="home-intro">
+    <h1>arnav</h1>
+    <div class="intro-copy">
+      <p>hey! im arnav.</p>
+      <p>
+        im interested in neuroscience and ai, which i've devoted a lot of my
+        time on.
+      </p>
+      <p>
+        i really like gengar and kubfu. ive done a lot of taekwondo and
+        badminton in my life, but you can usually find me sleeping or playing
+        brawl stars to relax. feel free to buy me a white monster or any mango
+        drink whenever!
+      </p>
+    </div>
+    <hr>
+    <div class="site-note">
+      <p>
+        i made this site to put some of my thoughts in a organized place. while
+        ive given myself the challenge of writing every day, that stays on
+        google docs :)
+      </p>
+    </div>
+  </section>
+  <section class="recent-posts" aria-labelledby="recent-posts-title">
+    <div class="section-header">
+      <h2 id="recent-posts-title">Recent Blog Posts</h2>
+      <a href={withBase("/blog")}>View all</a>
+    </div>
+    <ul aria-labelledby="recent-posts-title">
+      {posts.map((post) => (
+          <li>
+            <a class="post-card" href={withBase(`/blog/${post.id}`)}>
+              <h3>{post.data.title}</h3>
+              <div class="post-meta">
+                <time datetime={post.data.date.toISOString()}>
+                  {formatDate(post.data.date)}
+                </time>
+                {post.data.tags && post.data.tags.length > 0 && (
+                  <>
+                    <span aria-hidden="true">|</span>
+                    <span>{post.data.tags.map((tag) => `#${tag}`).join(", ")}</span>
+                  </>
+                )}
+              </div>
+              <p>{post.data.description}</p>
+            </a>
+          </li>
+        ))}
+    </ul>
+  </section>
+</Layout>
+
+<style>
+  .home-intro {
+    font-size: 1rem;
+    line-height: 1.45;
+    color: var(--muted-foreground);
+
+    @media (width >= 64rem) {
+      margin-block-start: -0.2em;
+    }
+
+    h1 {
+      font-size: var(--step-1);
+      line-height: calc(var(--leading-offset) + 1em);
+      font-weight: var(--font-weight-medium);
+      color: var(--foreground);
+      margin-block-end: var(--space-s);
+    }
+
+    .intro-copy {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+      max-inline-size: 60rem;
+    }
+
+    .intro-copy p,
+    .site-note p {
+      margin: 0;
+    }
+
+    hr {
+      margin-block: var(--space-s);
+      border-block-start: 2px solid var(--border);
+    }
+
+    .site-note {
+      max-inline-size: 60rem;
+    }
+  }
+
+  .recent-posts {
+    margin-block-start: var(--space-l);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-s);
+    margin-block-end: var(--space-s);
+  }
+
+  .section-header h2 {
+    font-size: var(--step-1);
+    line-height: calc(var(--leading-offset) + 1em);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .section-header a {
+    flex-shrink: 0;
+    font-size: var(--step-0);
+  }
+
+  .recent-posts ul {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-s);
+  }
+
+  .post-card {
+    display: block;
+    padding: var(--space-xs);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--foreground);
+    text-decoration-line: none;
+  }
+
+  .post-card:hover {
+    background-color: color-mix(in oklab, var(--muted) 35%, transparent);
+  }
+
+  .post-card h3 {
+    font-size: var(--step-0);
+    line-height: calc(var(--leading-offset) + 1em);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2xs);
+    margin-block-start: var(--space-2xs);
+    color: var(--muted-foreground);
+  }
+
+  .post-card p {
+    margin-block-start: var(--space-xs);
+    color: var(--muted-foreground);
+  }
+
+  @media (width < 40rem) {
+    .home-intro,
+    .post-card {
+      font-size: var(--step-0);
+    }
+
+    .section-header {
+      align-items: flex-start;
+    }
+  }
+</style>

@@ -1,0 +1,125 @@
+---
+import ThemeToggle from "@/components/ThemeToggle.astro"
+import { NAVIGATION, SITE } from "@/consts"
+import { normalizePath, withBase, withoutBase } from "@/lib/utils"
+
+type Props = { crumbs?: { label: string; href: string }[] }
+
+const { crumbs = [] } = Astro.props
+const pathname = normalizePath(withoutBase(Astro.url.pathname)) || "/"
+---
+
+<aside>
+  <a href={withBase("/")} aria-label={SITE.title}>
+    <site-mark>
+      <img src={withBase("/gengar.jpg")} alt="" width="48" height="48">
+    </site-mark>
+    <span>{SITE.title}</span>
+  </a>
+  <nav>
+    <ul>
+      {NAVIGATION.map((item) => (
+          <li>
+            <a
+              href={withBase(item.href)}
+              aria-current={
+                pathname === item.href || pathname.startsWith(`${item.href}/`)
+                  ? "page"
+                  : undefined
+              }
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      {crumbs.length > 1 && (
+          <li data-current>
+            <a href={crumbs.at(-1)?.href} aria-current="page">
+              {crumbs.at(-1)?.label}
+            </a>
+          </li>
+        )}
+    </ul>
+  </nav>
+  <header-actions>
+    <ThemeToggle />
+    <slot name="actions" />
+  </header-actions>
+</aside>
+
+<style>
+  aside {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-s);
+    width: min(100%, var(--measure));
+    min-height: 3.5rem;
+    margin-inline: auto;
+    padding-inline: var(--space-s-m);
+  }
+
+  aside > a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-shrink: 0;
+    font-weight: var(--font-weight-medium);
+    color: var(--foreground);
+    text-decoration-line: none;
+  }
+
+  site-mark {
+    display: grid;
+    place-items: center;
+    inline-size: 1.35rem;
+    block-size: 1.35rem;
+
+    img {
+      inline-size: 100%;
+      block-size: 100%;
+      border-radius: var(--radius-md);
+      object-fit: cover;
+    }
+  }
+
+  nav ul {
+    display: flex;
+    align-items: center;
+    gap: var(--space-s);
+
+    a {
+      display: block;
+      color: var(--muted-foreground);
+
+      &:hover,
+      &[aria-current="page"] {
+        color: var(--foreground);
+      }
+    }
+
+    li[data-current] {
+      display: none;
+    }
+  }
+
+  header-actions {
+    display: flex;
+    align-items: center;
+    margin-inline-start: -0.5rem;
+  }
+
+  @media (width < 32rem) {
+    aside {
+      gap: var(--space-xs);
+    }
+
+    aside > a span {
+      display: none;
+    }
+
+    header-actions {
+      margin-inline-end: -0.5rem;
+    }
+  }
+</style>

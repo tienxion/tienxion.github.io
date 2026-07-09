@@ -1,0 +1,5 @@
+<svg width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="TX" xmlns="http://www.w3.org/2000/svg">
+<rect width="512" height="512" rx="64" fill="currentColor" fill-opacity="0.08"/>
+<path d="M112 150H400V204H284V362H228V204H112V150Z" fill="currentColor"/>
+<path d="M154 362L238 252L155 150H221L273 217L324 150H390L306 253L398 362H331L272 288L216 362H154Z" fill="currentColor"/>
+</svg>
